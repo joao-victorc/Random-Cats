@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gatinhos Aleatórios</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 30px;
+      background-color: #f5f5f5;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      background-color: #333;
+      color: white;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    img {
+      margin-top: 20px;
+      max-width: 400px;
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    p {
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <h1>Imagem aleatória de gatinho</h1>
+  <p>Clique no botão para ver outro gatinho 😺</p>
+
+  <button id="btn">Buscar outro gatinho</button>
+  <br />
+  <img id="catImg" alt="Imagem aleatória de gatinho" />
+
+  <script>
+    const botao = document.getElementById("btn");
+    const imagem = document.getElementById("catImg");
+
+    async function buscarGatinho() {
+      try {
+        const resposta = await fetch("https://api.thecatapi.com/v1/images/search");
+        const dados = await resposta.json();
+
+        imagem.src = dados[0].url;
+      } catch (erro) {
+        console.error("Erro ao buscar imagem:", erro);
+      }
+    }
+
+    botao.addEventListener("click", buscarGatinho);
+
+    // Carrega uma imagem automaticamente quando a página abrir
+    buscarGatinho();
+  </script>
+</body>
+</html>
